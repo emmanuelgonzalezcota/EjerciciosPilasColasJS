@@ -345,7 +345,83 @@ console.log(JSON.stringify(myList))
 // b)	Recorrer la Lista para mostrar los Elementos en pantalla.
 // c)	Mostrar todos los Nodos que superen un valor determinado.
 
+console.log("")
+console.log("Ejercicio 2 Lista Aleatoria")
+class Nodo {
+    constructor(dato){
+        this.valor = dato
+        this.siguiente = null
+    }
+}
 
+class ListaEnlazada{
+    constructor(){
+        this.cabeza = null
+        this.elementos = 0
+    }
+    
+    agregarNodo(valor){
+        const nodo = new Nodo(valor)
+        if (this.cabeza === null){
+            this.cabeza = nodo
+        } else {
+            let nodoActual = this.cabeza
+            while(nodoActual.siguiente !== null){ nodoActual = nodoActual.siguiente }
+            nodoActual.valor===nodo.valor ? console.log(nodoActual.valor,' Dato repetido!'):
+            nodoActual.siguiente = nodo
+        }
+        this.elementos++
+    }
+
+    recorreLista(){
+        let listaRecorrida = ''
+        let nodoActual = this.cabeza
+        if (nodoActual) {
+            let count = 0
+            while (nodoActual.siguiente) {
+                listaRecorrida += nodoActual.valor
+                listaRecorrida += ' -> '
+                nodoActual = nodoActual.siguiente
+                count++
+            }
+            listaRecorrida += nodoActual.valor
+        }
+        return listaRecorrida
+    }
+
+    nodosMayores(valor){
+        let listaMayores = []
+        let nodoActual = this.cabeza
+        if (nodoActual) {
+            while (nodoActual.siguiente) {
+                if(nodoActual.valor>valor){listaMayores.push(nodoActual.valor)}
+                nodoActual = nodoActual.siguiente
+            }
+            if(nodoActual.valor>valor){listaMayores.push(nodoActual.valor)}
+        }
+        return listaMayores
+    }
+}
+
+const miListaEnlazadaAleatoria = new ListaEnlazada()
+for (let index = 0; index < 10; index++) {
+    miListaEnlazadaAleatoria.agregarNodo(Math.floor(Math.random()*100))
+}
+console.log('a) Lista Aleatoria');
+console.log(miListaEnlazadaAleatoria)
+
+// const miLista1a10 = new ListaEnlazada()
+// for (let index = 1; index <= 10; index++) {
+//     miLista1a10.agregarNodo(index)
+// }
+// console.log(miLista1a10)
+
+// console.log(miLista1a10.recorreLista())
+console.log('b) Recorre Lista');
+console.log(miListaEnlazadaAleatoria.recorreLista())
+const mayor = Math.floor(Math.random()*100)
+console.log('c) Nodos Mayores a ',mayor);
+console.log(miListaEnlazadaAleatoria.nodosMayores(mayor))
 
 // Arboles binarios.
 
